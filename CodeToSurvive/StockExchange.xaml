@@ -1,0 +1,198 @@
+﻿<Window x:Class="CodeToSurvive.StockExchange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeToSurvive"
+        mc:Ignorable="d"
+        Title="StockExchange" Height="800"
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <!-- ========================= -->
+    <!-- BACKGROUND -->
+    <!-- ========================= -->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/StockExchange_bg.png"
+                        Stretch="Uniform"/>
+        </Grid.Background>
+
+        <!-- ========================= -->
+        <!-- MAIN LAYOUT -->
+        <!-- ========================= -->
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ========================= -->
+            <!-- LEFT PANEL: MARKET LIST -->
+            <!-- ========================= -->
+            <Border Grid.Column="0"
+                    Background="#AA000000"
+                    CornerRadius="12"
+                    Padding="15">
+
+                <StackPanel>
+                    <TextBlock Text="📊 Market Watch"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0 0 0 15"/>
+
+                    <ListBox x:Name="StockList"
+                             Height="500"
+                             Background="#22000000"
+                             Foreground="White"
+                             BorderThickness="0">
+                        <ListBoxItem>TECH Corp (TC)</ListBoxItem>
+                        <ListBoxItem>CODE Systems (CS)</ListBoxItem>
+                        <ListBoxItem>DATA Labs (DL)</ListBoxItem>
+                        <ListBoxItem>AI Ventures (AI)</ListBoxItem>
+                        <ListBoxItem>GAME Studios (GS)</ListBoxItem>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+
+            <!-- ========================= -->
+            <!-- CENTER PANEL: STOCK DETAILS -->
+            <!-- ========================= -->
+            <Border Grid.Column="1"
+                    Background="#AA000000"
+                    CornerRadius="12"
+                    Margin="20 0"
+                    Padding="20">
+
+                <StackPanel>
+                    <TextBlock x:Name="StockTitleText"
+                               Text="Select a Stock"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0 0 0 10"/>
+
+                    <TextBlock x:Name="StockDescriptionText"
+                               Text="Market details will appear here."
+                               FontSize="16"
+                               Foreground="LightGray"
+                               TextWrapping="Wrap"
+                               Margin="0 0 0 20"/>
+
+                    <Separator Margin="0 10"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0 20">
+
+                        <StackPanel Margin="20">
+                            <TextBlock Text="💲 Price"
+                                       Foreground="White"
+                                       FontSize="14"/>
+                            <TextBlock x:Name="StockPriceText"
+                                       Text="$0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="LightGreen"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="20">
+                            <TextBlock Text="📈 Trend"
+                                       Foreground="White"
+                                       FontSize="14"/>
+                            <TextBlock x:Name="StockTrendText"
+                                       Text="Stable"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="LightBlue"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="20">
+                            <TextBlock Text="⚠ Risk"
+                                       Foreground="White"
+                                       FontSize="14"/>
+                            <TextBlock x:Name="StockRiskText"
+                                       Text="Medium"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Orange"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0 20">
+
+                        <Button x:Name="BtnBuyStock"
+                                Content="Buy"
+                                Width="140"
+                                Height="45"
+                                Background="#FF22C55E"
+                                Foreground="Black"
+                                Margin="10"/>
+
+                        <Button x:Name="BtnSellStock"
+                                Content="Sell"
+                                Width="140"
+                                Height="45"
+                                Background="#FFEF4444"
+                                Foreground="White"
+                                Margin="10"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- ========================= -->
+            <!-- RIGHT PANEL: PLAYER PORTFOLIO -->
+            <!-- ========================= -->
+            <Border Grid.Column="2"
+                    Background="#AA000000"
+                    CornerRadius="12"
+                    Padding="15">
+
+                <StackPanel>
+                    <TextBlock Text="📁 Portfolio"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0 0 0 15"/>
+
+                    <TextBlock x:Name="StockMoneyText"
+                               Text="💰 Money: $0"
+                               Foreground="White"
+                               FontSize="16"
+                               Margin="0 5"/>
+
+                    <TextBlock x:Name="InvestmentValueText"
+                               Text="📈 Investment Value: $0"
+                               Foreground="White"
+                               FontSize="16"
+                               Margin="0 5"/>
+
+                    <Separator Margin="0 15"/>
+
+                    <TextBlock Text="Your Holdings"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0 0 0 5"/>
+
+                    <ListBox x:Name="PortfolioList"
+                             Height="280"
+                             Background="#22000000"
+                             Foreground="White"
+                             BorderThickness="0"/>
+
+                    <Separator Margin="0 15"/>
+
+                    <Button x:Name="BtnExitStockExchange"
+                            Content="← Return to City"
+                            Height="40"
+                            Background="#FF3B82F6"
+                            Foreground="White"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

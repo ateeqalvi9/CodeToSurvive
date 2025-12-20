@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\background.png" />
+    <None Remove="Assets\bank-bg.png" />
+    <None Remove="Assets\home-bg.png" />
+    <None Remove="Assets\softwre-bg.png" />
+    <None Remove="Assets\StockExchange_bg.png" />
+    <None Remove="Assets\uni-bg.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CodeToSurvive.Language">
+      <HintPath>..\..\CodeToSurvive.Language\CodeToSurvive.Language\bin\Debug\net8.0\CodeToSurvive.Language.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\background.png" />
+    <Resource Include="Assets\bank-bg.png" />
+    <Resource Include="Assets\home-bg.png" />
+    <Resource Include="Assets\softwre-bg.png" />
+    <Resource Include="Assets\StockExchange_bg.png" />
+    <Resource Include="Assets\uni-bg.png" />
+  </ItemGroup>
+
+</Project>
