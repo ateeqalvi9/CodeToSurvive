@@ -95,7 +95,7 @@ namespace CodeToSurvive
             }
 
             _player.Money -= price;
-            _player.CurrentOutfit = outfitKey;
+            _player.CurrentOutfitPath = outfitKey;
             ChangeOutfitImage(outfitKey);
             UpdateUI();
         }

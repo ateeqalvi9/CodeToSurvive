@@ -9,6 +9,14 @@ namespace CodeToSurvive
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            StartupWindow win = new StartupWindow();
+            win.Show();
+        }
+
     }
 
 }

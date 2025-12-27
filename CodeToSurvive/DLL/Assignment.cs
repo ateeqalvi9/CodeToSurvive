@@ -8,6 +8,7 @@ namespace CodeToSurvive.DLL
 {
     public class Assignment
     {
+        public int AssignmentId { get; set; }
         public string Question { get; set; }
         public int TimeLimitSeconds { get; set; }
         public bool IsExam { get; set; }

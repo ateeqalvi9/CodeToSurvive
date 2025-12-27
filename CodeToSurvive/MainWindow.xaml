@@ -86,6 +86,20 @@
                    Height="260"
                    Canvas.Left="960"
                    Canvas.Top="-10" RenderTransformOrigin="0.645,-0.59"/>
+            <!-- BINARY BOUTIQUE -->
+            <!-- BINARY BOUTIQUE -->
+            <Image Source="pack://application:,,,/Assets/Binary_Boutique.png"
+                   Width="220"
+                   Height="200"
+                   Canvas.Left="820"
+                   Canvas.Top="260"/>
+
+            <!-- SYNTAX SNACKS -->
+            <Image Source="pack://application:,,,/Assets/Syntax_Snacks.png"
+                   Width="220"
+                   Height="180"
+                   Canvas.Left="470"
+                   Canvas.Top="520"/>
 
             <!-- ============================= -->
             <!-- PLAYER -->
@@ -142,6 +156,23 @@
                     Click="BtnHouse_Click"
                     Style="{StaticResource BuildingButtonNoHover}" 
                     HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            <Button x:Name="BtnBinaryBoutique"
+                    Width="220"
+                    Height="200"
+                    Canvas.Left="820"
+                    Canvas.Top="260"
+                    Click="BtnBinaryBoutique_Click"
+                    Style="{StaticResource BuildingButtonNoHover}"/>
+
+            <Button x:Name="BtnSyntaxSnacks"
+                    Width="220"
+                    Height="180"
+                    Canvas.Left="470"
+                    Canvas.Top="520"
+                    Click="BtnSyntaxSnacks_Click"
+                    Style="{StaticResource BuildingButtonNoHover}"/>    
+
 
             <Button x:Name="BtnBank"
                     Width="250"

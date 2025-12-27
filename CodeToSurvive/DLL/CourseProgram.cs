@@ -8,8 +8,13 @@ namespace CodeToSurvive.DLL
 {
     public class CourseProgress
     {
-        public int LessonIndex { get; set; }
+        public int LessonId { get; set; }
         public double ProgressPercent { get; set; }
-        public bool Completed { get; set; }
+        public int ProgressId { get; set; }
+        public int PlayerId { get; set; }
+        public int CourseId { get; set; }
+        public int CurrentLessonIndex { get; set; }
+        public bool IsCompleted { get; set; }
+        public DateTime LastUpdated { get; internal set; }
     }
 }

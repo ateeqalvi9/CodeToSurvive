@@ -9,167 +9,85 @@
         Width="1200"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <!-- ========================= -->
-    <!-- ROOT GRID -->
-    <!-- ========================= -->
     <Grid>
-        <!-- BACKGROUND IMAGE -->
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/uni-bg.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Assets/uni-bg.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="260"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ========================= -->
-            <!-- LEFT PANEL: COURSES + PROGRESS -->
-            <!-- ========================= -->
-            <Border Grid.Column="0"
-                    Background="#CC111827"
-                    CornerRadius="12"
-                    Padding="15">
+            <!-- LEFT: COURSES -->
+            <Border Grid.Column="0" Background="#AA000000" CornerRadius="12" Padding="15">
                 <StackPanel>
-                    <TextBlock Text="📚 Courses"
-                               FontSize="24"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               Margin="0 0 0 15"/>
+                    <TextBlock Text="📚 Courses" FontSize="22" FontWeight="Bold" Foreground="White"/>
 
-                    <!-- C++ Course -->
-                    <StackPanel Margin="0 8">
-                        <Button x:Name="BtnCpp"
-                                Content="C++ Programming"
-                                Height="45"
-                                FontWeight="SemiBold"
-                                Foreground="White"
-                                Background="#FF1F2937"
-                                Click="BtnCpp_Click"/>
-                        <ProgressBar x:Name="CppProgress" Height="12" Maximum="100" Value="0" Margin="0 4"/>
-                    </StackPanel>
-
-                    <!-- C# Course -->
-                    <StackPanel Margin="0 8">
-                        <Button x:Name="BtnCSharp"
-                                Content="C#.NET"
-                                Height="45"
-                                FontWeight="SemiBold"
-                                Foreground="White"
-                                Background="#FF1F2937"
-                                Click="BtnCSharp_Click"/>
-                        <ProgressBar x:Name="CSharpProgress" Height="12" Maximum="100" Value="0" Margin="0 4"/>
-                    </StackPanel>
-
-                    <!-- Web Course -->
-                    <StackPanel Margin="0 8">
-                        <Button x:Name="BtnWeb"
-                                Content="Web Development"
-                                Height="45"
-                                FontWeight="SemiBold"
-                                Foreground="White"
-                                Background="#FF1F2937"
-                                Click="BtnWeb_Click"/>
-                        <ProgressBar x:Name="WebProgress" Height="12" Maximum="100" Value="0" Margin="0 4"/>
-                    </StackPanel>
+                    <Button Content="C++ Programming" Margin="0 10" Click="BtnCpp_Click"/>
+                    <Button Content="C# .NET" Margin="0 10" Click="BtnCSharp_Click"/>
+                    <Button Content="Web Development" Margin="0 10" Click="BtnWeb_Click"/>
                 </StackPanel>
             </Border>
 
-            <!-- ========================= -->
-            <!-- CENTER PANEL: COURSE DETAILS -->
-            <!-- ========================= -->
-            <Border Grid.Column="1"
-                    Background="#CC1F2937"
-                    CornerRadius="12"
-                    Padding="25"
-                    Margin="20 0">
+            <!-- CENTER: COURSE DETAILS -->
+            <Border Grid.Column="1" Background="#AA000000" CornerRadius="12" Padding="20" Margin="15 0">
                 <StackPanel>
                     <TextBlock x:Name="CourseTitleText"
                                FontSize="28"
                                FontWeight="Bold"
-                               Foreground="LightYellow"
-                               Margin="0 0 0 10"/>
+                               Foreground="White"/>
 
                     <TextBlock x:Name="CourseDescriptionText"
                                FontSize="16"
                                Foreground="LightGray"
-                               TextWrapping="Wrap"
-                               Margin="0 0 0 20"/>
+                               Margin="0 10"
+                               TextWrapping="Wrap"/>
 
-                    <!-- Course Stats -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20">
-                        <StackPanel Margin="20">
-                            <TextBlock Text="🧠 Skill Gain" Foreground="White"/>
-                            <TextBlock x:Name="SkillGainText" FontSize="18" FontWeight="Bold" Foreground="LightGreen"/>
-                        </StackPanel>
+                    <Separator Margin="10"/>
 
-                        <StackPanel Margin="20">
-                            <TextBlock Text="⚡ Energy Cost" Foreground="White"/>
-                            <TextBlock x:Name="EnergyCostText" FontSize="18" FontWeight="Bold" Foreground="Orange"/>
-                        </StackPanel>
+                    <ProgressBar x:Name="CourseProgressBar"
+                                 Height="22"
+                                 Margin="0 10"
+                                 Maximum="100"/>
 
-                        <StackPanel Margin="20">
-                            <TextBlock Text="📅 Duration" Foreground="White"/>
-                            <TextBlock x:Name="DurationText" FontSize="18" FontWeight="Bold" Foreground="LightBlue"/>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="SkillGainText" Margin="20" Foreground="LightGreen"/>
+                        <TextBlock x:Name="EnergyCostText" Margin="20" Foreground="Orange"/>
                     </StackPanel>
 
-                    <!-- ========================= -->
-                    <!-- COURSE FLOW PANEL -->
-                    <!-- ========================= -->
-                    <Border Background="#33000000"
-                            CornerRadius="8"
-                            Padding="12"
-                            Margin="0 10">
-                        <StackPanel>
-                            <TextBlock Text="📝 Course Flow"
-                                       FontSize="16"
-                                       FontWeight="Bold"
-                                       Foreground="White"
-                                       Margin="0 0 0 6"/>
-                            <TextBlock Text="• Read lessons" Foreground="LightGray" Margin="0 4"/>
-                            <TextBlock Text="• Complete coding tasks" Foreground="LightGray" Margin="0 4"/>
-                            <TextBlock Text="• Pass syntax validation" Foreground="LightGray" Margin="0 4"/>
-                            <TextBlock Text="• Complete final exam" Foreground="LightGray" Margin="0 4"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- ENROLL / START BUTTON -->
                     <Button x:Name="BtnEnroll"
-                            Content="Enroll and Start Course"
+                            Content="Enroll / Continue"
                             Height="50"
                             FontSize="16"
-                            Background="#FF2ECC71"
-                            Foreground="Black"
-                            Margin="0 25 0 0" Click="BtnEnroll_Click"/>
+                            Margin="0 20"
+                            Background="#FF22C55E"
+                            Click="BtnEnroll_Click"/>
                 </StackPanel>
             </Border>
 
-            <!-- ========================= -->
-            <!-- RIGHT PANEL: PLAYER HUD -->
-            <!-- ========================= -->
-            <Border Grid.Column="2"
-                    Background="#CC111827"
-                    CornerRadius="12"
-                    Padding="15">
+            <!-- RIGHT: HUD -->
+            <Border Grid.Column="2" Background="#AA000000" CornerRadius="12" Padding="15">
                 <StackPanel>
                     <TextBlock Text="🎓 Student Status"
                                FontSize="20"
                                FontWeight="Bold"
-                               Foreground="White"
-                               Margin="0 0 0 15"/>
-                    <TextBlock x:Name="UniMoneyText" FontSize="16" Foreground="White" Margin="0 5"/>
-                    <TextBlock x:Name="UniEnergyText" FontSize="16" Foreground="White" Margin="0 5"/>
-                    <TextBlock x:Name="UniSkillText" FontSize="16" Foreground="White" Margin="0 5"/>
-                    <TextBlock x:Name="UniDayText" FontSize="16" Foreground="White" Margin="15 15 0 0"/>
-                    <Separator Margin="15"/>
-                    <Button x:Name="BtnExitUniversity"
-                            Content="← Return to City"
+                               Foreground="White"/>
+
+                    <TextBlock x:Name="UniMoneyText" Margin="0 8" Foreground="White"/>
+                    <TextBlock x:Name="UniEnergyText" Margin="0 8" Foreground="White"/>
+                    <TextBlock x:Name="UniSkillText" Margin="0 8" Foreground="White"/>
+                    <TextBlock x:Name="UniDayText" Margin="0 8" Foreground="White"/>
+
+                    <Separator Margin="10"/>
+
+                    <Button Content="← Return to City"
                             Height="40"
-                            Background="#FFE74C3C"
-                            Foreground="White" Click="BtnExitUniversity_Click"/>
+                            Background="#FFEF4444"
+                            Foreground="White"
+                            Click="BtnExitUniversity_Click"/>
                 </StackPanel>
             </Border>
         </Grid>

@@ -1,5 +1,6 @@
 ﻿using CodeToSurvive;
 using CodeToSurvive.DLL;
+using CodeToSurvive.Services;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,11 +14,15 @@ namespace CodeToSurvive_P1
 
         private Player _player = new Player();
         private int _day = 1;
-
-        public MainWindow()
+        private int playerId;
+        public MainWindow() : this(new Player())
+        {
+        }
+        public MainWindow(Player player)
         {
             InitializeComponent();
-
+            _player = player;
+            GameState.Initialize();
             Loaded += (s, e) =>
             {
                 GameCanvas.Focus();
@@ -25,7 +30,11 @@ namespace CodeToSurvive_P1
                 UpdateHUD();
             };
         }
-
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            GameSaveService.SaveGame(_player);
+            base.OnClosing(e);
+        }
         // ==============================
         // MOVEMENT
         // ==============================
@@ -113,7 +122,7 @@ namespace CodeToSurvive_P1
 
         private void BtnUniversity_Click(object sender, RoutedEventArgs e)
         {
-            new University(_player).ShowDialog();
+            new University(_player, playerId).ShowDialog();
             EndDay();
         }
 
@@ -128,6 +137,7 @@ namespace CodeToSurvive_P1
             new Bank(_player).ShowDialog();
             UpdateHUD();
         }
+
         private void BtnStockExchange_Click(object sender, RoutedEventArgs e)
         {
             StockExchange stock = new StockExchange(_player);
@@ -136,6 +146,17 @@ namespace CodeToSurvive_P1
             EndDay(); // Stock exchange advances day
         }
 
+        private void BtnSyntaxSnacks_Click(object sender, RoutedEventArgs e)
+        {
+            new SyntaxSnacks(_player).ShowDialog();
+            EndDay();
+        }
+
+        private void BtnBinaryBoutique_Click(object sender, RoutedEventArgs e)
+        {
+            new BinaryBotique(_player).ShowDialog();
+            UpdateHUD();
+        }
 
         // ==============================
         // DAY / HUD

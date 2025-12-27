@@ -4,10 +4,11 @@ namespace CodeToSurvive.DLL
 {
     public class Course
     {
+        public int CourseId { get; set; }
         public string Name { get; set; }
         public int SkillReward { get; set; }
         public int DurationDays { get; set; }
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; set; } = new List<Lesson>();
         public Assignment Assignment { get; set; }
         public Exam Exam { get; set; }
         public string Description { get; set; }

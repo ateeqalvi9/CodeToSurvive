@@ -9,192 +9,79 @@
         Width="1200"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <!-- ========================= -->
-    <!-- BACKGROUND -->
-    <!-- ========================= -->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/softwre-bg.png"
-                        Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Assets/softwre-bg.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <!-- ========================= -->
-        <!-- MAIN LAYOUT -->
-        <!-- ========================= -->
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="280"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ========================= -->
-            <!-- LEFT PANEL : JOB LIST -->
-            <!-- ========================= -->
-            <Border Grid.Column="0"
-                    Background="#AA000000"
-                    CornerRadius="12"
-                    Padding="15">
-
+            <!-- LEFT: JOB LIST -->
+            <Border Grid.Column="0" Background="#AA000000" CornerRadius="12" Padding="15">
                 <StackPanel>
-                    <TextBlock Text="💼 Available Jobs"
-                               FontSize="20"
+                    <TextBlock Text="💼 Jobs"
+                               FontSize="22"
                                FontWeight="Bold"
-                               Foreground="White"
-                               Margin="0 0 0 15"/>
+                               Foreground="White"/>
 
-                    <Button x:Name="BtnJuniorDev"
-                            Content="Junior Developer Task"
-                            Height="45"
-                            Margin="0 5"
-                            Click="BtnJuniorDev_Click"/>
-
-                    <Button x:Name="BtnWebDev"
-                            Content="Web Developer Task"
-                            Height="45"
-                            Margin="0 5"
-                            Click="BtnWebDev_Click"/>
-
-                    <Button x:Name="BtnBackendDev"
-                            Content="Backend Developer Task"
-                            Height="45"
-                            Margin="0 5"
-                            Click="BtnBackendDev_Click"/>
-
-                    <Button x:Name="BtnAIEngineer"
-                            Content="AI Engineer Task"
-                            Height="45"
-                            Margin="0 5"
-                            Click="BtnAIEngineer_Click"/>
+                    <Button Content="Intern Task" Margin="0 10" Click="Intern_Click"/>
+                    <Button Content="Junior Developer" Margin="0 10" Click="Junior_Click"/>
+                    <Button Content="Mid Developer" Margin="0 10" Click="Mid_Click"/>
+                    <Button Content="Senior Developer" Margin="0 10" Click="Senior_Click"/>
                 </StackPanel>
             </Border>
 
-            <!-- ========================= -->
-            <!-- CENTER PANEL : JOB DETAILS -->
-            <!-- ========================= -->
-            <Border Grid.Column="1"
-                    Background="#AA000000"
-                    CornerRadius="12"
-                    Margin="20 0"
-                    Padding="20">
-
+            <!-- CENTER: JOB DETAILS -->
+            <Border Grid.Column="1" Background="#AA000000" CornerRadius="12" Padding="20" Margin="15 0">
                 <StackPanel>
                     <TextBlock x:Name="JobTitleText"
-                               Text="Select a Job"
-                               FontSize="28"
+                               FontSize="26"
                                FontWeight="Bold"
-                               Foreground="White"
-                               Margin="0 0 0 10"/>
+                               Foreground="White"/>
 
                     <TextBlock x:Name="JobDescriptionText"
-                               Text="Job details will appear here."
-                               FontSize="16"
                                Foreground="LightGray"
-                               TextWrapping="Wrap"
-                               Margin="0 0 0 20"/>
+                               Margin="0 10"
+                               TextWrapping="Wrap"/>
 
-                    <Separator Margin="0 10"/>
+                    <Separator Margin="10"/>
 
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Margin="0 20">
+                    <TextBlock x:Name="SalaryText" Foreground="LightGreen" FontSize="18"/>
+                    <TextBlock x:Name="EnergyCostText" Foreground="Orange" FontSize="18"/>
+                    <TextBlock x:Name="ReputationText" Foreground="LightBlue" FontSize="18"/>
 
-                        <StackPanel Margin="20">
-                            <TextBlock Text="💰 Salary"
-                                       Foreground="White"
-                                       FontSize="14"/>
-                            <TextBlock x:Name="SalaryText"
-                                       Text="$0"
-                                       FontSize="18"
-                                       FontWeight="Bold"
-                                       Foreground="LightGreen"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="20">
-                            <TextBlock Text="⚡ Energy Cost"
-                                       Foreground="White"
-                                       FontSize="14"/>
-                            <TextBlock x:Name="EnergyCostText"
-                                       Text="-0"
-                                       FontSize="18"
-                                       FontWeight="Bold"
-                                       Foreground="Orange"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="20">
-                            <TextBlock Text="⭐ Reputation"
-                                       Foreground="White"
-                                       FontSize="14"/>
-                            <TextBlock x:Name="ReputationText"
-                                       Text="+0"
-                                       FontSize="18"
-                                       FontWeight="Bold"
-                                       Foreground="Gold"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <Button x:Name="BtnStartJob"
-                            Content="Start Job"
+                    <Button Content="Start Work"
                             Height="50"
-                            FontSize="16"
-                            Background="#FF3B82F6"
-                            Foreground="White"
-                            Margin="0 30 0 0"
-                            Click="BtnStartJob_Click"/>
+                            Margin="0 20"
+                            Background="#FF22C55E"
+                            Click="BtnStartWork_Click"/>
                 </StackPanel>
             </Border>
 
-            <!-- ========================= -->
-            <!-- RIGHT PANEL : PLAYER HUD -->
-            <!-- ========================= -->
-            <Border Grid.Column="2"
-                    Background="#AA000000"
-                    CornerRadius="12"
-                    Padding="15">
-
+            <!-- RIGHT: HUD -->
+            <Border Grid.Column="2" Background="#AA000000" CornerRadius="12" Padding="15">
                 <StackPanel>
-                    <TextBlock Text="👤 Employee Status"
+                    <TextBlock Text="👨‍💻 Employee Status"
                                FontSize="20"
                                FontWeight="Bold"
-                               Foreground="White"
-                               Margin="0 0 0 15"/>
+                               Foreground="White"/>
 
-                    <TextBlock x:Name="SHMoneyText"
-                               Text="💰 Money: $0"
-                               Foreground="White"
-                               FontSize="16"
-                               Margin="0 5"/>
+                    <TextBlock x:Name="SHMoneyText" Margin="6" Foreground="White"/>
+                    <TextBlock x:Name="SHEnergyText" Margin="6" Foreground="White"/>
+                    <TextBlock x:Name="SHSkillText" Margin="6" Foreground="White"/>
+                    <TextBlock x:Name="SHReputationText" Margin="6" Foreground="White"/>
+                    <TextBlock x:Name="SHJobText" Margin="6" Foreground="White"/>
 
-                    <TextBlock x:Name="SHEnergyText"
-                               Text="⚡ Energy: 0%"
-                               Foreground="White"
-                               FontSize="16"
-                               Margin="0 5"/>
+                    <Separator Margin="10"/>
 
-                    <TextBlock x:Name="SHSkillText"
-                               Text="🧠 Skill: 0"
-                               Foreground="White"
-                               FontSize="16"
-                               Margin="0 5"/>
-
-                    <TextBlock x:Name="SHReputationText"
-                               Text="⭐ Reputation: 0"
-                               Foreground="White"
-                               FontSize="16"
-                               Margin="0 5"/>
-
-                    <TextBlock x:Name="SHDayText"
-                               Text="📅 Day 1"
-                               Foreground="White"
-                               FontSize="16"
-                               Margin="0 15 0 0"/>
-
-                    <Separator Margin="0 15"/>
-
-                    <Button x:Name="BtnExitSoftwareHouse"
-                            Content="← Return to City"
+                    <Button Content="← Return to City"
                             Height="40"
-                            Background="#FFE74C3C"
+                            Background="#FFEF4444"
                             Foreground="White"
                             Click="BtnExitSoftwareHouse_Click"/>
                 </StackPanel>

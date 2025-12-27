@@ -1,5 +1,4 @@
 ﻿using CodeToSurvive.DLL;
-using System.Collections.Generic;
 using System.Windows;
 
 namespace CodeToSurvive
@@ -7,48 +6,50 @@ namespace CodeToSurvive
     public partial class University : Window
     {
         private readonly Player _player;
-        private int _currentLessonIndex = 0;
-        private Course _currentCourse;
-        private Dictionary<Course, CourseProgress> _progress = new Dictionary<Course, CourseProgress>();
-        private Course _cpp, _csharp, _web;
         private Course _selectedCourse;
-        private int _lessonProgress = 0;
+        private int _lessonIndex = 0;
+        private CourseProgress _progress;
 
-        public University(Player player)
+        public University(Player player, int playerId)
         {
             InitializeComponent();
             _player = player;
+            LoadHUD();
         }
 
-        // ================= COURSE BUTTONS =================
+        // ================= SELECT COURSE =================
+
         private void BtnCpp_Click(object sender, RoutedEventArgs e)
         {
-            _selectedCourse = CourseFactory.CreateCppCourse();
-            ShowCourse();
+            LoadCourse(CourseFactory.CreateCppCourse());
         }
 
         private void BtnCSharp_Click(object sender, RoutedEventArgs e)
         {
-            _selectedCourse = CourseFactory.CreateCSharpCourse();
-            ShowCourse();
+            LoadCourse(CourseFactory.CreateCSharpCourse());
         }
 
         private void BtnWeb_Click(object sender, RoutedEventArgs e)
         {
-            _selectedCourse = CourseFactory.CreateWebCourse();
-            ShowCourse();
+            LoadCourse(CourseFactory.CreateWebCourse());
         }
 
-        private void ShowCourse()
+        private void LoadCourse(Course c)
         {
-            CourseTitleText.Text = _selectedCourse.Name;
-            CourseDescriptionText.Text = _selectedCourse.Description;
-            SkillGainText.Text = $"+{_selectedCourse.SkillGain}";
-            EnergyCostText.Text = $"-{_selectedCourse.EnergyCost}";
-            DurationText.Text = $"{_selectedCourse.DurationDays} Days";
+            _selectedCourse = c;
+
+            CourseTitleText.Text = c.Name;
+            CourseDescriptionText.Text = c.Description;
+
+            SkillGainText.Text = $"🧠 Skill +{c.SkillGain}";
+            EnergyCostText.Text = $"⚡ Energy -{c.EnergyCost}";
+
+            LoadOrCreateProgress();
+            UpdateProgressBar();
         }
 
         // ================= ENROLL =================
+
         private void BtnEnroll_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedCourse == null)
@@ -57,46 +58,87 @@ namespace CodeToSurvive
                 return;
             }
 
+            LoadOrCreateProgress();
+
             StartLesson();
         }
 
+        // ================= DB LOGIC =================
+
+        private void LoadOrCreateProgress()
+        {
+            using var db = new GameDbContext();
+
+            _progress = db.CourseProgress
+                .FirstOrDefault(p => p.PlayerId == _player.Id
+                                  && p.CourseId == _selectedCourse.CourseId);
+
+            if (_progress == null)
+            {
+                _progress = new CourseProgress
+                {
+                    PlayerId = _player.Id,
+                    CourseId = _selectedCourse.CourseId,
+                    CurrentLessonIndex = 0,
+                    IsCompleted = false
+                };
+
+                db.CourseProgress.Add(_progress);
+                db.SaveChanges();
+            }
+
+            _lessonIndex = _progress.CurrentLessonIndex;
+        }
+
+        private void SaveProgress()
+        {
+            using var db = new GameDbContext();
+
+            var p = db.CourseProgress.First(x => x.CourseId == _progress.CourseId);
+
+            p.CurrentLessonIndex = _lessonIndex;
+            p.LastUpdated = DateTime.Now;
+
+            db.SaveChanges();
+        }
+
         // ================= LESSON FLOW =================
+
         private void StartLesson()
         {
-            Lesson lesson = _selectedCourse.Lessons[_currentLessonIndex];
-            LessonWindow lw = new LessonWindow(_selectedCourse.Lessons, _lessonProgress);
+            LessonWindow lw = new LessonWindow(
+                _selectedCourse.Lessons,
+                _lessonIndex
+            );
+
             lw.ShowDialog();
 
-            StartAssignment(lesson.Assignment);
+            if (!lw.LessonsCompleted)
+                return;
+
+            StartAssignment(_selectedCourse.Lessons[_lessonIndex].Assignment);
         }
 
         private void StartAssignment(Assignment assignment)
         {
-            CodeEditorWindow editor = new CodeEditorWindow();
-            editor.ShowDialog();
+            AssignmentWindow aw = new AssignmentWindow(assignment);
+            bool? ok = aw.ShowDialog();
 
-            if (string.IsNullOrWhiteSpace(editor.SourceCode))
-            {
-                MessageBox.Show("Assignment failed.");
+            if (ok != true)
                 return;
-            }
 
-            // Simple validation
-            if (!editor.SourceCode.Contains("for"))
-            {
-                MessageBox.Show("Incorrect code.");
-                return;
-            }
+            _lessonIndex++;
+            SaveProgress();
+            UpdateProgressBar();
 
-            _currentLessonIndex++;
-
-            if (_currentLessonIndex >= _selectedCourse.Lessons.Count)
+            if (_lessonIndex >= _selectedCourse.Lessons.Count)
                 StartExam();
             else
                 StartLesson();
         }
 
         // ================= EXAM =================
+
         private void StartExam()
         {
             ExamWindow ew = new ExamWindow(_selectedCourse.Exam);
@@ -104,15 +146,32 @@ namespace CodeToSurvive
 
             if (!ew.IsPassed)
             {
-                MessageBox.Show("You failed the exam.");
+                MessageBox.Show("Exam Failed ❌");
                 return;
             }
 
+            using var db = new GameDbContext();
+            var p = db.CourseProgress.First(x => x.CourseId == _progress.CourseId);
+            p.IsCompleted = true;
+            db.SaveChanges();
+
             _player.CodingSkill += _selectedCourse.SkillGain;
             _player.Energy -= _selectedCourse.EnergyCost;
+            _player.AdvanceDay();
 
-            MessageBox.Show("Course completed successfully!");
+            MessageBox.Show("🎓 Course Completed!");
+
             LoadHUD();
+        }
+
+        // ================= UI =================
+
+        private void UpdateProgressBar()
+        {
+            double percent =
+                ((double)_lessonIndex / _selectedCourse.Lessons.Count) * 100;
+
+            CourseProgressBar.Value = percent;
         }
 
         private void LoadHUD()
@@ -120,11 +179,12 @@ namespace CodeToSurvive
             UniMoneyText.Text = $"💰 Money: ${_player.Money}";
             UniEnergyText.Text = $"⚡ Energy: {_player.Energy}%";
             UniSkillText.Text = $"🧠 Skill: {_player.CodingSkill}";
-            UniDayText.Text = $"📅 Day {_player.Day}";
+            UniDayText.Text = $"📅 Day {_player.CurrentDay}";
         }
+
         private void BtnExitUniversity_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
