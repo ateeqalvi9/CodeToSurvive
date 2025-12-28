@@ -39,9 +39,9 @@ namespace CodeToSurvive
         {
             _meals = new List<MenuMeal>
             {
-                new MenuMeal { Name="Debug Burger", Description="Greasy but powerful.", Price=20, EnergyRestore=15, ImagePath="/Assets/Meals/burger.png"},
-                new MenuMeal { Name="Algorithm Pizza", Description="Cheesy problem solving fuel.", Price=35, EnergyRestore=25, ImagePath="/Assets/Meals/pizza.png"},
-                new MenuMeal { Name="Compiler Coffee", Description="Keeps you coding… too long.", Price=10, EnergyRestore=10, ImagePath="/Assets/Meals/coffee.png"}
+                new MenuMeal { Name="Debug Burger", Description="Greasy but powerful.", Price=20, EnergyRestore=15, ImagePath="/Assets/Meals/BudagetMeal.png"},
+                new MenuMeal { Name="Algorithm Pizza", Description="Cheesy problem solving fuel.", Price=35, EnergyRestore=25, ImagePath="/Assets/Meals/HealthyMeal.png"},
+                new MenuMeal { Name="Compiler Coffee", Description="Keeps you coding… too long.", Price=10, EnergyRestore=10, ImagePath="/Assets/Meals/StandardMeal.png"}
             };
         }
 

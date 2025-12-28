@@ -91,15 +91,24 @@
             <Image Source="pack://application:,,,/Assets/Binary_Boutique.png"
                    Width="220"
                    Height="200"
-                   Canvas.Left="820"
-                   Canvas.Top="260"/>
+                   Canvas.Left="578"
+                   Canvas.Top="192"/>
 
             <!-- SYNTAX SNACKS -->
             <Image Source="pack://application:,,,/Assets/Syntax_Snacks.png"
                    Width="220"
                    Height="180"
-                   Canvas.Left="470"
-                   Canvas.Top="520"/>
+                   Canvas.Left="710"
+                   Canvas.Top="280" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="1.806"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="3.468"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
 
             <!-- ============================= -->
             <!-- PLAYER -->
@@ -160,18 +169,18 @@
             <Button x:Name="BtnBinaryBoutique"
                     Width="220"
                     Height="200"
-                    Canvas.Left="820"
-                    Canvas.Top="260"
+                    Canvas.Left="469"
+                    Canvas.Top="276"
                     Click="BtnBinaryBoutique_Click"
                     Style="{StaticResource BuildingButtonNoHover}"/>
 
             <Button x:Name="BtnSyntaxSnacks"
                     Width="220"
                     Height="180"
-                    Canvas.Left="470"
-                    Canvas.Top="520"
+                    Canvas.Left="710"
+                    Canvas.Top="296"
                     Click="BtnSyntaxSnacks_Click"
-                    Style="{StaticResource BuildingButtonNoHover}"/>    
+                    Style="{StaticResource BuildingButtonNoHover}"/>
 
 
             <Button x:Name="BtnBank"
